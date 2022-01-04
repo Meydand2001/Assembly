@@ -5,6 +5,7 @@ lw $s0, $imm1, $zero, $zero, 0x100, 0							# $s0 = n
 lw $s1, $imm1, $zero, $zero, 0x101, 0							# $s1 = k
 add $v0, $zero, $zero, $zero, 0, 0									# $v0 = 0
 sll $sp, $imm1, $imm2, $zero, 1, 11		            # set $sp = 1 << 11 = 2048
+add $ra, $imm1, $zero, $zero, DIEBITCH, 0         # $ra = DIEBITCH
 
 BINOM:
 add $sp, $sp, $imm1, $zero, -3, 0									# $sp -= 3
@@ -26,4 +27,6 @@ lw $s1, $sp, $imm1, $zero, 1, 0										# $s1 = MEM[$sp + 1]
 lw $ra, $sp, $imm1, $zero, 2, 0										# $ra = MEM[$sp + 2]
 add $sp, $sp, $imm1, $zero, 3, 0									# $sp += 3
 beq $zero, $zero, $zero, $ra, 0, 0									# jump to $ra
+
+DIEBITCH:
 halt $zero, $zero, $zero, $zero, 0, 0

@@ -6,6 +6,7 @@ out $zero, $imm1, $zero, $imm2, 7, SUFFER				  # return = SUFFER
 add $t2, $zero, $zero, $zero, 0, 0								# $t2 = 0
 
 DECIDE:
+out $zero, $imm1, $zero, $imm2, 4, 0				      # irq1status = 0
 beq $zero, $t2, $zero, $imm1, READ, 0						  # if $t2 = 0 jump to READ
 beq $zero, $t2, $imm2, $imm1, WRITE, 1					  # if $t2 = 1 jump to WRITE
 
@@ -14,7 +15,7 @@ out $zero, $imm1, $zero, $t0, 15, 0								# sector number = $t0
 out $zero, $imm1, $zero, $t1, 16, 0								# sector buffer = $t1
 out $zero, $imm1, $zero, $imm2, 14, 1						  # read sector 
 add $t2, $imm1, $zero, $zero, 1, 0								# $t2 = 1
-add $t0, $t0, $imm1, $zero, 1, 0								# $t0 += 1
+add $t0, $t0, $imm1, $zero, 1, 0								  # $t0 += 1
 reti $zero, $zero, $zero, $zero, 0, 0							# return
 
 WRITE:

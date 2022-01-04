@@ -6,7 +6,7 @@ add $t2, $zero, $zero, $zero, 0, 0								# $t2 = 0
 
 SUFFER:
 blt $zero, $t0, $zero, $imm1, DIEBITCH, 0 				# if $t0 < 0, jump to DIEBITCH
-beq $zero, $zero, $zero, $imm1, SUFFER, 0					# Suffers for itenety until 
+beq $zero, $zero, $zero, $imm1, SUFFER, 0					# Suffers for eternity until 
 
 DECIDE:
 beq $zero, $t2, $zero, $imm1, READ, 0						# if $t2 = 0 jump to READ

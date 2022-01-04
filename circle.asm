@@ -1,6 +1,7 @@
 .word 0x100 20
 
 lw $a0, $imm1, $zero, $zero, 0x100, 0					  # $a0 = MEM[0x100] = radius
+mac $a0, $a0, $a0, $zero, 0, 0                  # $a0 = r^2
 add $a1, $imm1, $zero, $zero, 128, 0            # $a1 = center point
 add $t0, $imm1, $zero, $zero, -1, 0						  # $t0 = -1
 sll $s0, $imm1, $imm2, $zero, 1, 16             # $s0 = 65536

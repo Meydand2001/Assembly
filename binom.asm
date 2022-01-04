@@ -25,3 +25,4 @@ lw $s1, $sp, $imm1, $zero, 4, 0										# $s1 = MEM[$sp + 4]
 lw $ra, $sp, $imm1, $zero, 8, 0										# $ra = MEM[$sp + 8]
 add $sp, $sp, $imm1, $zero, 12, 0									# $sp += 12
 beq $zero, $zero, $zero, $ra, 0, 0									# jump to $ra
+halt $zero, $zero, $zero, $zero, 0, 0

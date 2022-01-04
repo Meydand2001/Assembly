@@ -49,6 +49,7 @@ beq $zero, $zero, $zero, $imm2, 0, CINDEX		  # jump to CINDEX
 OPT:
 add $s0, $t0, $zero, $zero, 0, 0							# $s0 = $t0 (Row = Index/4 rounded down * 4, {0,4,8,12})
 add $s1, $t2, $zero, $zero, 0, 0							# $s1 = $t2 (Column = Index mod 4, {0,1,2,3})
+add $t2, $zero, $zero, $zero, 0, 0						# $t2 = 0 
 
 CCELL:
 lw $t0, $a0, $s0, $zero, 0, 0								  # $t0 = MEM[$a0+$s0] (first matrix value)

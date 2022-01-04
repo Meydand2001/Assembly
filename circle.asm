@@ -7,7 +7,7 @@ add $t0, $imm1, $zero, $zero, -1, 0						  # $t0 = -1
 sll $s0, $imm1, $imm2, $zero, 1, 16             # $s0 = 65536
 
 CALC:
-bge $zero, $t0, $s0, $imm2, 0, RIP				      # if $t0 = $s0 then RIP
+bge $zero, $t0, $s0, $imm2, 0, RIP				      # if $t0 >= $s0 then RIP
 add $t0, $t0, $imm1, $zero, 1, 0								# $t0 += 1
 srl $t1, $t0, $imm1, $zero, 8, 0								# $t1 = $t0 : 256 rounded down
 sll $t1, $t1, $imm1, $zero, 8, 0                # $t1 = $t1 * 256

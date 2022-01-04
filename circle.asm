@@ -3,9 +3,10 @@
 lw $a0, $imm1, $zero, $zero, 0x100, 0					  # $a0 = MEM[0x100] = radius
 add $a1, $imm1, $zero, $zero, 128, 0            # $a1 = center point
 add $t0, $imm1, $zero, $zero, -1, 0						  # $t0 = -1
+sll $s0, $imm1, $imm2, $zero, 1, 16             # $s0 = 65536
 
 CALC:
-bgt $zero, $t0, $imm1, $imm2, 65535, RIP				# if $t0 
+beq $zero, $t0, $s0, $imm2, 0, RIP				      # if $t0 = $s0 then RIP
 add $t0, $t0, $imm1, $zero, 1, 0								# $t0 += 1
 srl $t1, $t0, $imm1, $zero, 8, 0								# $t1 = $t1 : 256 rounded down
 sll $t1, $t1, $imm1, $zero, 8, 0                # $t1 = $t1 * 256

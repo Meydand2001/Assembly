@@ -41,7 +41,6 @@ add $t1, $zero, $zero, $zero, 0, 0						# $t1 = 0
 add $t2, $zero, $zero, $zero, 0, 0						# $t2 = 0 (Result matrix column Index from 0 to 4)
 
 CINDEX:
-add $t2, $s2, $zero, $zero, 0, 0							# $t2 = $s2
 blt $zero, $t2, $imm1, $imm2, 0x4, OPT				# if ($t2 < 4): jump to OPT
 sub $t2, $t2, $imm1, $zero, 0x4, 0						# $t2 = $t2 - 4
 add $t0, $t0, $imm1, $zero, 0x4, 0 						# $t0 += 4
@@ -64,5 +63,6 @@ add $v0, $zero, $zero, $zero, 0, 0						# $v0 = 0
 add $t0, $zero, $zero, $zero, 0, 0						# $t0 = 0
 add $t1, $zero, $zero, $zero, 0, 0						# $t1 = 0
 add $s2, $s2, $imm1, $zero, 0x1, 0 					  # $s2 += 1
+add $t2, $s2, $zero, $zero, 0, 0							# $t2 = $s2
 blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	  # if ($s2 < 16): jump to CINDEX
 halt $zero, $zero, $zero, $zero, 0, 0

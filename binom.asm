@@ -16,10 +16,10 @@ beq $zero, $s1, $zero, $imm1, CALC, 0							# if [k==0] jump to CALC
 beq $zero, $s1, $s0, $imm1, CALC, 0							# if [k==n] jump to CALC
 add $s0, $s0, $imm1, $zero, -1, 0									# $s0 = $s0 - 1
 jal $ra, $zero, $zero, $imm1, BINOM, 0 							# jump to BINOM
-add $v0, $imm1, $zero, $zero, 1, 0									# $v0 += 1
+add $v0, $v0, $imm1, $zero, 1, 0									# $v0 += 1
 add $s1, $s1, $imm1, $zero, -1, 0									# $s1 = $s1 - 1
 jal $ra, $zero, $zero, $imm1, BINOM, 0 							# jump to BINOM
-add $v0, $imm1, $zero, $zero, 1, 0									# $v0 += 1
+add $v0, $v0, $imm1, $zero, 1, 0									# $v0 += 1
 
 CALC:
 lw $s0, $sp, $imm1, $zero, 0, 0										# $s0 = MEM[$sp + 0]
@@ -29,4 +29,5 @@ add $sp, $sp, $imm1, $zero, 3, 0									# $sp += 3
 beq $zero, $zero, $zero, $ra, 0, 0									# jump to $ra
 
 DIEBITCH:
+sw $v0, $imm1, $zero, $zero, 0x102, 0             # MEM[0x102] = $v0
 halt $zero, $zero, $zero, $zero, 0, 0

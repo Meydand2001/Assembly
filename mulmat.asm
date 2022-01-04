@@ -58,10 +58,11 @@ mac $v0, $t0, $t1, $v0, 0, 0									# $v0 += $t0 * $t1
 add $s0, $s0, $imm1, $zero, 0x1, 0 					  # $s0 += 1
 add $s1, $s1, $imm1, $zero, 0x4, 0 					  # $s1 += 4
 add $t2, $t2, $imm1, $zero, 0x1, 0						# $t2 += 1 (counting 4 times)
-bgt $zero, $t2, $imm1, $imm2, 0x4, CCELL		  # if ($t2 < 4): jump to CCELL
+blt $zero, $t2, $imm1, $imm2, 0x4, CCELL		  # if ($t2 < 4): jump to CCELL
 sw $v0, $a2, $s2, $zero, 0, 0								  # MEM[$a2+$s2] = $v0 
 add $v0, $zero, $zero, $zero, 0, 0						# $v0 = 0
 add $t0, $zero, $zero, $zero, 0, 0						# $t0 = 0
+add $t1, $zero, $zero, $zero, 0, 0						# $t1 = 0
 add $s2, $s2, $imm1, $zero, 0x1, 0 					  # $s2 += 1
 blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	  # if ($s2 < 16): jump to CINDEX
 halt $zero, $zero, $zero, $zero, 0, 0

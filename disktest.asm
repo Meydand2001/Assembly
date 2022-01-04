@@ -14,7 +14,7 @@ out $zero, $imm1, $zero, $t0, 15, 0								# sector number = $t0
 out $zero, $imm1, $zero, $t1, 16, 0								# sector buffer = $t1
 out $zero, $imm1, $zero, $imm2, 14, 1						  # read sector 
 add $t2, $imm1, $zero, $zero, 1, 0								# $t2 = 1
-add $t0, $imm1, $zero, $zero, 1, 0								# $t0 += 1
+add $t0, $t0, $imm1, $zero, 1, 0								# $t0 += 1
 reti $zero, $zero, $zero, $zero, 0, 0							# return
 
 WRITE:

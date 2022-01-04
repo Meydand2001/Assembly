@@ -21,8 +21,7 @@ out $zero, $imm1, $zero, $t0, 15, 0								# sector number = $t0
 out $zero, $imm1, $zero, $t1, 16, 0								# sector buffer = $t1
 out $zero, $imm1, $zero, $imm2, 14, 2						# write to sector 
 add $t2, $zero, $zero, $zero, 0, 0								# $t2 = 0
-add $t0, $t0, $imm1, $zero, -1, 0								# $t0 -= 1
-add $t1, $t1, $imm1, $zero, -128, 0							# $t1 -= 128
+add $t0, $t0, $imm1, $zero, -2, 0								# $t0 -= 2
 reti $zero, $zero, $zero, $zero, 0, 0							# return
 
 SUFFER:

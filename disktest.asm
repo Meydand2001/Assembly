@@ -29,4 +29,4 @@ blt $zero, $t0, $zero, $imm1, DIEBITCH, 0 				# if $t0 < 0, jump to DIEBITCH
 beq $zero, $zero, $zero, $imm1, SUFFER, 0					# Suffers for eternity until 
 
 DIEBITCH:
-Halt $zero, $zero, $zero, $zero, 0, 0							# Literally die bitch
+halt $zero, $zero, $zero, $zero, 0, 0							# Literally die bitch

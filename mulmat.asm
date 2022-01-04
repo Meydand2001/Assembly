@@ -64,3 +64,4 @@ add $v0, $zero, $zero, $zero, 0, 0						# $v0 = 0
 add $t0, $zero, $zero, $zero, 0, 0						# $t0 = 0
 add $s2, $s2, $imm1, $zero, 0x1, 0 					  # $s2 += 1
 blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	  # if ($s2 < 16): jump to CINDEX
+halt $zero, $zero, $zero, $zero, 0, 0

@@ -4,6 +4,7 @@
 lw $s0, $imm1, $zero, $zero, 0x100, 0							# $s0 = n
 lw $s1, $imm1, $zero, $zero, 0x101, 0							# $s1 = k
 add $v0, $zero, $zero, $zero, 0, 0									# $v0 = 0
+add $sp, $imm1, $zero, $zero, 2048, 0             # $sp = 2048
 
 BINOM:
 add $sp, $sp, $imm1, $zero, -12, 0									# $sp -= 12

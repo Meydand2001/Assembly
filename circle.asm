@@ -12,8 +12,8 @@ add $t0, $t0, $imm1, $zero, 1, 0								# $t0 += 1
 srl $t1, $t0, $imm1, $zero, 8, 0								# $t1 = $t0 : 256 rounded down
 sll $t1, $t1, $imm1, $zero, 8, 0                # $t1 = $t1 * 256
 sub $t1, $t0, $t1, $imm1, -128 , 0              # $t1 = $t0 mod 256 - 128 = x -128
-mac $t2, $t1, $imm1, $t0, -256, 0								# $t2 = $t0 - 256*$t1 = y
 srl $t2, $t0, $imm1, $zero, 8, 0								# $t2 = $t0 : 256 rounded down
+sub $t2, $t2, $imm1, $zero, 128, 0              # $t2 = $t2 - 128
 mac $t1, $t1, $t1, $zero, 0, 0									# $t1 = $t1^2 = (x-128)^2
 mac $t2, $t2, $t2, $t1, 0, 0										# $t2 = (x-128)^2 +(y-128)^2
 bgt $zero, $t2, $a0, $imm1, 0, CALC						  # if ((x-128)^2 +(y-128)^2 > r^2) jump to CALC

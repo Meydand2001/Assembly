@@ -1,12 +1,8 @@
 add $t0, $imm1, $zero, $zero, 7, 0								# $t0 = 7
-add $t1, $imm1, $zero, $zero, 892, 0							# $t1 = 128*7
+add $t1, $zero, $zero, $zero, 0, 0							# $t1 = 0
 out $zero, $imm1, $zero, $imm2, 1, 1							# Enable Irq1
 out $zero, $imm1, $zero, $imm2, 6, DECIDE				# Handler = DECIDE
 add $t2, $zero, $zero, $zero, 0, 0								# $t2 = 0
-
-SUFFER:
-blt $zero, $t0, $zero, $imm1, DIEBITCH, 0 				# if $t0 < 0, jump to DIEBITCH
-beq $zero, $zero, $zero, $imm1, SUFFER, 0					# Suffers for eternity until 
 
 DECIDE:
 beq $zero, $t2, $zero, $imm1, READ, 0						# if $t2 = 0 jump to READ
@@ -28,6 +24,10 @@ add $t2, $zero, $zero, $zero, 0, 0								# $t2 = 0
 add $t0, $t0, $imm1, $zero, -1, 0								# $t0 -= 1
 add $t1, $t1, $imm1, $zero, -128, 0							# $t1 -= 128
 reti $zero, $zero, $zero, $zero, 0, 0							# return
+
+SUFFER:
+blt $zero, $t0, $zero, $imm1, DIEBITCH, 0 				# if $t0 < 0, jump to DIEBITCH
+beq $zero, $zero, $zero, $imm1, SUFFER, 0					# Suffers for eternity until 
 
 DIEBITCH:
 Halt $zero, $zero, $zero, $zero, 0, 0							# Literally die bitch

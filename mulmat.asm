@@ -45,22 +45,22 @@ add $t2, $s2, $zero, $zero, 0, 0							# $t2 = $s2
 blt $zero, $t2, $imm1, $imm2, 0x4, OPT				# if ($t2 < 4): jump to OPT
 sub $t2, $t2, $imm1, $zero, 0x4, 0						# $t2 = $t2 - 4
 add $t0, $t0, $imm1, $zero, 0x4, 0 						# $t0 += 4
-beq $zero, $zero, $zero, $imm2, 0, CINDEX		# jump to CINDEX
+beq $zero, $zero, $zero, $imm2, 0, CINDEX		  # jump to CINDEX
 
 OPT:
 add $s0, $t0, $zero, $zero, 0, 0							# $s0 = $t0 (Row = Index/4 rounded down * 4, {0,4,8,12})
 add $s1, $t2, $zero, $zero, 0, 0							# $s1 = $t2 (Column = Index mod 4, {0,1,2,3})
 
 CCELL:
-lw $t0, $a0, $s0, $zero, 0, 0								# $t0 = MEM[$a0+$s0] (first matrix value)
-lw $t1, $a1, $s1, $zero, 0, 0								# $t1 = MEM[$a1+$s1] (second matrix value)
+lw $t0, $a0, $s0, $zero, 0, 0								  # $t0 = MEM[$a0+$s0] (first matrix value)
+lw $t1, $a1, $s1, $zero, 0, 0								  # $t1 = MEM[$a1+$s1] (second matrix value)
 mac $v0, $t0, $t1, $v0, 0, 0									# $v0 += $t0 * $t1
-add $s0, $s0, $imm1, $zero, 0x1, 0 					# $s0 += 1
-add $s1, $s1, $imm1, $zero, 0x4, 0 					# $s1 += 4
+add $s0, $s0, $imm1, $zero, 0x1, 0 					  # $s0 += 1
+add $s1, $s1, $imm1, $zero, 0x4, 0 					  # $s1 += 4
 add $t2, $t2, $imm1, $zero, 0x1, 0						# $t2 += 1 (counting 4 times)
-bgt $zero, $t2, $imm1, $imm2, 0x4, CCELL		# if ($t2 < 4): jump to CCELL
-sw $v0, $a2, $s2, $zero, 0, 0								# MEM[$a2+$s2] = $v0 
+bgt $zero, $t2, $imm1, $imm2, 0x4, CCELL		  # if ($t2 < 4): jump to CCELL
+sw $v0, $a2, $s2, $zero, 0, 0								  # MEM[$a2+$s2] = $v0 
 add $v0, $zero, $zero, $zero, 0, 0						# $v0 = 0
 add $t0, $zero, $zero, $zero, 0, 0						# $t0 = 0
-add $s2, $s2, $imm1, $zero, 0x1, 0 					# $s2 += 1
-blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	# if ($s2 < 16): jump to CINDEX
+add $s2, $s2, $imm1, $zero, 0x1, 0 					  # $s2 += 1
+blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	  # if ($s2 < 16): jump to CINDEX

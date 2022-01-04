@@ -16,7 +16,7 @@ srl $t2, $t0, $imm1, $zero, 8, 0								# $t2 = $t0 : 256 rounded down
 sub $t2, $t2, $imm1, $zero, 128, 0              # $t2 = $t2 - 128
 mac $t1, $t1, $t1, $zero, 0, 0									# $t1 = $t1^2 = (x-128)^2
 mac $t2, $t2, $t2, $t1, 0, 0										# $t2 = (x-128)^2 +(y-128)^2
-bgt $zero, $t2, $a0, $imm1, 0, CALC						  # if ((x-128)^2 +(y-128)^2 > r^2) jump to CALC
+bgt $zero, $t2, $a0, $imm2, 0, CALC						  # if ((x-128)^2 +(y-128)^2 > r^2) jump to CALC
 
 COLOR:
 out $zero, $imm1, $zero, $t0, 20, 0							# montioraddr = $t0 = (x,y)

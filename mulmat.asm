@@ -66,4 +66,4 @@ add $t1, $zero, $zero, $zero, 0, 0						        # $t1 = 0
 add $s2, $s2, $imm1, $zero, 0x1, 0 					          # $s2 += 1
 add $t2, $s2, $zero, $zero, 0, 0							        # $t2 = $s2 (Ready for the next CINDEX calc)
 blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	          # if ($s2 < 16): jump to CINDEX
-halt $zero, $zero, $zero, $zero, 0, 0
+halt $zero, $zero, $zero, $zero, 0, 0                 

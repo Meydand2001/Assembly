@@ -31,9 +31,9 @@
 .word 0x11E 14 
 .word 0x11F 15
 
-add $a0, $imm1, $zero, $zero, 0x100, 0				        # $a0 = 0x100
-add $a1, $imm1, $zero, $zero, 0x110, 0				        # $a1 = 0x110
-add $a2, $imm1, $zero, $zero, 0x120, 0				        # $a2 = 0x120
+add $a0, $imm1, $zero, $zero, 0x100, 0				        # $a0 = first address of matrix 1
+add $a1, $imm1, $zero, $zero, 0x110, 0				        # $a1 = first address of matrix 2
+add $a2, $imm1, $zero, $zero, 0x120, 0				        # $a2 = first address of result matrix
 add $s2, $zero, $zero, $zero, 0, 0						        # $s2 = 0 (Result matrix Index from 0 to 15)
 add $v0, $zero, $zero, $zero, 0, 0						        # $v0 = 0 (Result value)
 add $t0, $zero, $zero, $zero, 0, 0						        # $t0 = 0 (Result matrix row Index from 0 to 4)
@@ -41,29 +41,29 @@ add $t1, $zero, $zero, $zero, 0, 0						        # $t1 = 0
 add $t2, $zero, $zero, $zero, 0, 0						        # $t2 = 0 (Result matrix column Index from 0 to 4)
 
 CINDEX:
-blt $zero, $t2, $imm1, $imm2, 0x4, OPT				        # if ($t2 < 4): jump to OPT
-sub $t2, $t2, $imm1, $zero, 0x4, 0						        # $t2 = $t2 - 4
-add $t0, $t0, $imm1, $zero, 0x4, 0 						        # $t0 += 4
+blt $zero, $t2, $imm1, $imm2, 0x4, OPT				        # if ($t2 < 4): jump to OPT 
+sub $t2, $t2, $imm1, $zero, 0x4, 0						        # $t2 = $t2 - 4 (Calc $s2 mod 4) 
+add $t0, $t0, $imm1, $zero, 0x4, 0 						        # $t0 += 4 (Calc $s2 - $s2 mod 4)
 beq $zero, $zero, $zero, $imm2, 0, CINDEX		          # jump to CINDEX
 
 OPT:
 add $s0, $t0, $zero, $zero, 0, 0							        # $s0 = $t0 (Row = Index/4 rounded down * 4, {0,4,8,12})
 add $s1, $t2, $zero, $zero, 0, 0							        # $s1 = $t2 (Column = Index mod 4, {0,1,2,3})
-add $t2, $zero, $zero, $zero, 0, 0						        # $t2 = 0 
+add $t2, $zero, $zero, $zero, 0, 0						        # $t2 = 0 (Used now as a counter for the future multiplication)
 
 CCELL:
 lw $t0, $a0, $s0, $zero, 0, 0								          # $t0 = MEM[$a0+$s0] (first matrix value)
 lw $t1, $a1, $s1, $zero, 0, 0								          # $t1 = MEM[$a1+$s1] (second matrix value)
-mac $v0, $t0, $t1, $v0, 0, 0									        # $v0 += $t0 * $t1
-add $s0, $s0, $imm1, $zero, 0x1, 0 					          # $s0 += 1
-add $s1, $s1, $imm1, $zero, 0x4, 0 					          # $s1 += 4
+mac $v0, $t0, $t1, $v0, 0, 0									        # $v0 += $t0 * $t1 
+add $s0, $s0, $imm1, $zero, 0x1, 0 					          # $s0 += 1 (Up matrix 1 offset by 1 to continue in the row)
+add $s1, $s1, $imm1, $zero, 0x4, 0 					          # $s1 += 4 (Up matrix 2 offset by 4 to continue in the column)
 add $t2, $t2, $imm1, $zero, 0x1, 0						        # $t2 += 1 (counting 4 times)
 blt $zero, $t2, $imm1, $imm2, 0x4, CCELL		          # if ($t2 < 4): jump to CCELL
-sw $v0, $a2, $s2, $zero, 0, 0								          # MEM[$a2+$s2] = $v0 
+sw $v0, $a2, $s2, $zero, 0, 0								          # MEM[$a2+$s2] = $v0 (Stores the value)
 add $v0, $zero, $zero, $zero, 0, 0						        # $v0 = 0
 add $t0, $zero, $zero, $zero, 0, 0						        # $t0 = 0
 add $t1, $zero, $zero, $zero, 0, 0						        # $t1 = 0
 add $s2, $s2, $imm1, $zero, 0x1, 0 					          # $s2 += 1
-add $t2, $s2, $zero, $zero, 0, 0							        # $t2 = $s2
+add $t2, $s2, $zero, $zero, 0, 0							        # $t2 = $s2 (Ready for the next CINDEX calc)
 blt $zero, $s2, $imm1, $imm2, 0x10, CINDEX	          # if ($s2 < 16): jump to CINDEX
 halt $zero, $zero, $zero, $zero, 0, 0

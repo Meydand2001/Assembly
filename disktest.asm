@@ -1,9 +1,9 @@
-add $t0, $imm1, $zero, $zero, 7, 0							        	# $t0 = 7
-add $t1, $zero, $zero, $zero, 0, 0							          # $t1 = 0
+add $t0, $imm1, $zero, $zero, 7, 0							        	# $t0 = 7 (current sector)
+add $t1, $zero, $zero, $zero, 0, 0							          # $t1 = 0 (buffer)
 out $zero, $imm1, $zero, $imm2, 1, 1							        # Enable Irq1
 out $zero, $imm1, $zero, $imm2, 6, DECIDE				          # Handler = DECIDE
-out $zero, $imm1, $zero, $imm2, 7, SUFFER				          # return = SUFFER
-add $t2, $zero, $zero, $zero, 0, 0								        # $t2 = 0
+out $zero, $imm1, $zero, $imm2, 7, SUFFER				          # return = SUFFER (first reutrn value)
+add $t2, $zero, $zero, $zero, 0, 0								        # $t2 = 0 
 
 DECIDE:
 out $zero, $imm1, $zero, $imm2, 4, 0				              # irq1status = 0
